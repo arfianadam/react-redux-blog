@@ -1,25 +1,23 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import { App, Home, NotFound } from 'containers';
+import { App, NotFound } from 'containers';
 
 // eslint-disable-next-line import/no-dynamic-require
 if (typeof System.import === 'undefined') System.import = module => Promise.resolve(require(module));
 
-export default store => {
+export default () =>
 
   /**
    * Please keep routes in alphabetical order
    */
-  return (
-    <Route path="/" component={App}>
-      {/* Home (main) route */}
-      <IndexRoute component={Home} />
 
-      {/* Routes */}
-      <Route path="new" getComponent={() => System.import('./containers/New/New')} />
+  <Route path="/" component={App}>
+    {/* Home (main) route */}
+    <IndexRoute getComponent={() => System.import('./containers/Home/Home')} />
 
-      {/* Catch all route */}
-      <Route path="*" component={NotFound} status={404} />
-    </Route>
-  );
-};
+    {/* Routes */}
+    <Route path="new" getComponent={() => System.import('./containers/New/New')} />
+
+    {/* Catch all route */}
+    <Route path="*" component={NotFound} status={404} />
+  </Route>;

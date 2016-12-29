@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostsContainer } from 'containers';
+import PostsContainer from '../PostsContainer';
 import styles from './Home.scss';
 
 class Home extends React.Component {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import styles from './Header.scss';
 
 class Header extends React.Component {
@@ -9,7 +10,7 @@ class Header extends React.Component {
           <div className={styles.title}>React Blog</div>
           <nav>
             <ul>
-              <li><a href="">New Post</a></li>
+              <li><Link to="/new">New Post</Link></li>
             </ul>
           </nav>
         </div>

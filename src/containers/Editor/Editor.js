@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { convertToRaw } from 'draft-js';
+import autosize from 'autosize';
 import { Editor as TextEditor, createEditorState } from 'medium-draft';
 import styles from './Editor.scss';
 
@@ -16,6 +17,16 @@ class Editor extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentDidMount() {
+    const titleeditor = document.getElementById('titleeditor');
+    titleeditor.style.resize = 'none';
+    titleeditor.style.fontSize = '4rem';
+    titleeditor.style.border = 'none';
+    titleeditor.style.padding = '0';
+    titleeditor.style.margin = '30px 30px 0 30px';
+    autosize(titleeditor);
+  }
+
   onChange(editorState) {
     this.setState({ editorState });
     console.log(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
@@ -25,7 +36,7 @@ class Editor extends React.Component {
     const { editorState } = this.state;
     return (
       <div className={styles.Editor}>
-        <input type="text" placeholder="Title" />
+        <textarea placeholder="Title" rows="1" id="titleeditor"></textarea>
         <TextEditor
           editorState={editorState}
           onChange={this.onChange}

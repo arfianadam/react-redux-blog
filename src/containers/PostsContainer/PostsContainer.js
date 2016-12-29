@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Post } from 'components';
+import Post from '../../components/Post';
 import styles from './PostsContainer.scss';
 
 @connect(store => ({

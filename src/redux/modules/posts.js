@@ -24,7 +24,8 @@ const initialState = {
         }
       ]
     }
-  ]
+  ],
+  editor: ''
 };
 
 export default function reducer(state = initialState, action) {

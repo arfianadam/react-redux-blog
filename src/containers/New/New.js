@@ -1,4 +1,5 @@
 import React from 'react';
+import Editor from '../Editor';
 import styles from './New.scss';
 
 class New extends React.Component {
@@ -6,7 +7,7 @@ class New extends React.Component {
   render() {
     return (
       <div className={styles.New}>
-        {/* Your code here */}
+        <Editor />
       </div>
     );
   }

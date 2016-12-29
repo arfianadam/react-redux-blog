@@ -1,4 +1,4 @@
-@import '../../theme/variables';
+@import '~theme/variables';
 
 .Header {
 	background-color: rgba(0,0,0,0.05);
@@ -13,7 +13,8 @@
 	}
 
 	.title {
-		font-size: 3rem;
+		font-size: 2rem;
+		cursor: default;
 	}
 
 	nav {

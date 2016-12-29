@@ -1,0 +1,10 @@
+.Post {
+	margin-bottom: 5rem;
+	header {
+		margin-bottom: 2rem;
+		.date {
+			color: lighten(black, 40%);
+			font-weight: lighter;
+		}
+	}
+}

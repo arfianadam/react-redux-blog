@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from 'containers';
+import { Header, PostsContainer } from 'containers';
 import styles from './Home.scss';
 
 class Home extends React.Component {
@@ -8,7 +8,7 @@ class Home extends React.Component {
     return (
       <div className={styles.Home}>
         <Header />
-        <h1>Hello world!</h1>
+        <PostsContainer />
       </div>
     );
   }

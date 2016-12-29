@@ -4,3 +4,5 @@
  *  ie: import { CounterButton, InfoBar } from 'components';
  *
  */
+
+export Post from './Post';

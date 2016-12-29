@@ -16,7 +16,7 @@ export default store => {
       <IndexRoute component={Home} />
 
       {/* Routes */}
-      {/* <Route path="login" getComponent={() => System.import('./containers/Login/Login')} /> */}
+      <Route path="new" getComponent={() => System.import('./containers/New/New')} />
 
       {/* Catch all route */}
       <Route path="*" component={NotFound} status={404} />

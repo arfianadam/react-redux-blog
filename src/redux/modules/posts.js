@@ -1,6 +1,7 @@
 const initialState = {
   posts: [
     {
+      id: 1,
       title: 'Some blog title',
       time: new Date().getTime(),
       content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
@@ -12,6 +13,7 @@ const initialState = {
       ]
     },
     {
+      id: 2,
       title: 'Hello World!',
       time: new Date().getTime(),
       content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',

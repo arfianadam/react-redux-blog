@@ -25,6 +25,7 @@ class Editor extends React.Component {
     titleeditor.style.padding = '0';
     titleeditor.style.margin = '30px 30px 0 30px';
     autosize(titleeditor);
+    this.titleInput.focus();
   }
 
   onChange(editorState) {
@@ -36,7 +37,12 @@ class Editor extends React.Component {
     const { editorState } = this.state;
     return (
       <div className={styles.Editor}>
-        <textarea placeholder="Title" rows="1" id="titleeditor"></textarea>
+        <textarea
+          placeholder="Title"
+          rows="1"
+          id="titleeditor"
+          ref={(input) => { this.titleInput = input; }}>
+        </textarea>
         <TextEditor
           editorState={editorState}
           onChange={this.onChange}

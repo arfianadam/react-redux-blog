@@ -21,6 +21,7 @@ class Post extends React.Component {
           <h5 className={styles.date}>Posted at <span>{timeRender}</span></h5>
         </header>
         <div className="content" dangerouslySetInnerHTML={{ __html: data.content }}></div>
+        <hr />
       </article>
     );
   }

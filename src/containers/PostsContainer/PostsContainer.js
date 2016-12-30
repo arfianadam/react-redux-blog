@@ -14,6 +14,7 @@ class PostsContainer extends React.Component {
 
   render() {
     const { posts } = this.props;
+    posts.reverse();
     const renderPosts = posts.map((post, i) =>
       <Post
         data={post}

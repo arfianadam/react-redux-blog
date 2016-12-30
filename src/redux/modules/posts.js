@@ -1,31 +1,34 @@
 const initialState = {
   posts: [
-    {
-      id: 1,
-      title: 'Some blog title',
-      time: new Date().getTime(),
-      content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
-      comments: [
-        {
-          time: new Date().getTime(),
-          content: 'What a nice article!'
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Hello World!',
-      time: new Date().getTime(),
-      content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
-      comments: [
-        {
-          time: new Date().getTime(),
-          content: 'What a nice article!'
-        }
-      ]
-    }
+    // {
+    //   id: 1,
+    //   title: 'Some blog title',
+    //   time: new Date().getTime(),
+    //   content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
+    //   comments: [
+    //     {
+    //       time: new Date().getTime(),
+    //       content: 'What a nice article!'
+    //     }
+    //   ]
+    // },
+    // {
+    //   id: 2,
+    //   title: 'Hello World!',
+    //   time: new Date().getTime(),
+    //   content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
+    //   comments: [
+    //     {
+    //       time: new Date().getTime(),
+    //       content: 'What a nice article!'
+    //     }
+    //   ]
+    // }
   ],
-  editor: ''
+  editor: {
+    title: '',
+    content: {}
+  }
 };
 
 export default function reducer(state = initialState, action) {
@@ -38,17 +41,69 @@ export default function reducer(state = initialState, action) {
       return;
     }
 
+    case 'CREATING_TITLE': {
+      return {
+        ...state,
+        editor: {
+          ...state.editor,
+          title: action.payload
+        }
+      };
+    }
+
     case 'CREATING_POST': {
+      return {
+        ...state,
+        editor: {
+          ...state.editor,
+          content: action.payload
+        }
+      };
+    }
+
+    case 'NEW_POST': {
       return {
         ...state,
         posts: [
           ...state.posts,
-          action.payload
+          {
+            id: state.posts.length,
+            title: state.editor.title,
+            time: new Date().getTime(),
+            content: state.editor.content
+          }
         ]
+      };
+    }
+
+    case 'CLEAR_EDITOR': {
+      return {
+        ...state,
+        editor: {
+          title: '',
+          content: {}
+        }
       };
     }
 
     default:
       return state;
   }
+}
+
+export function typePost(data, type) {
+  return dispatch => {
+    if (type === 'title') {
+      dispatch({ type: 'CREATING_TITLE', payload: data });
+      return;
+    }
+    dispatch({ type: 'CREATING_POST', payload: data });
+  };
+}
+
+export function newPost() {
+  return dispatch => {
+    dispatch({ type: 'NEW_POST', payload: 'NEW_POST' });
+    dispatch({ type: 'CLEAR_EDITOR' });
+  };
 }

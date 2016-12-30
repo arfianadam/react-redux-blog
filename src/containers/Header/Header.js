@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import { newPost } from 'redux/modules/posts';
 import styles from './Header.scss';
 
 @connect(store => ({
@@ -9,10 +10,24 @@ import styles from './Header.scss';
 
 class Header extends React.Component {
   static propTypes = {
-    path: PropTypes.string
+    path: PropTypes.string,
+    dispatch: PropTypes.func
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.dispatch(newPost());
+    browserHistory.push('/');
   }
 
   render() {
+    const self = this;
     const { path } = this.props;
     function subtitle() {
       if (path === '/new') {
@@ -23,7 +38,7 @@ class Header extends React.Component {
       if (path === '/new') {
         return (
           <ul>
-            <li><Link to="/">Post</Link></li>
+            <li><a href="" onClick={self.handleClick}>Post</a></li>
             <li><Link to="/">Cancel</Link></li>
           </ul>
         );

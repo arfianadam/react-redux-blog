@@ -16,7 +16,9 @@ class App extends React.Component {
     return (
       <div className={styles.App}>
         <Header />
-        {children}
+        <div className={styles.container}>
+          {children}
+        </div>
       </div>
     );
   }

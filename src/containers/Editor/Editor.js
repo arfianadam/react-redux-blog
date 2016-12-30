@@ -22,8 +22,8 @@ class Editor extends React.Component {
     titleeditor.style.resize = 'none';
     titleeditor.style.fontSize = '4rem';
     titleeditor.style.border = 'none';
-    titleeditor.style.padding = '0';
-    titleeditor.style.margin = '30px 30px 0 30px';
+    titleeditor.style.padding = '0 30px';
+    titleeditor.style.margin = '0';
     autosize(titleeditor);
     this.titleInput.focus();
   }

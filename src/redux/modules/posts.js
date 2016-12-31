@@ -1,3 +1,5 @@
+import filter from 'lodash/filter';
+
 const initialState = {
   posts: [
     // {
@@ -67,10 +69,11 @@ export default function reducer(state = initialState, action) {
         posts: [
           ...state.posts,
           {
-            id: state.posts.length,
+            id: state.posts.length.toString(),
             title: state.editor.title,
             time: new Date().getTime(),
-            content: state.editor.content
+            content: state.editor.content,
+            comments: []
           }
         ]
       };
@@ -83,6 +86,14 @@ export default function reducer(state = initialState, action) {
           title: '',
           content: {}
         }
+      };
+    }
+
+    case 'NEW_COMMENT': {
+      const post = find(state.posts, { id: action.payload.id });
+      return {
+        ...state,
+
       };
     }
 

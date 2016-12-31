@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Post from 'components/Post';
+import CommentsContainer from 'containers/CommentsContainer';
 import styles from './Single.scss';
 
 @connect(store => ({
@@ -37,6 +38,7 @@ class Single extends React.Component {
     return (
       <div className={styles.Single}>
         <Post data={post} single />
+        <CommentsContainer id={post.id} />
       </div>
     );
   }

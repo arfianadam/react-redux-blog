@@ -1,0 +1,21 @@
+.CommentBox {
+	textarea {
+		width: 100%;
+		resize: vertical;
+	}
+
+	.submitButton {
+		text-align: right;
+
+		button {
+			padding: 10px 20px;
+			border: 1px solid #ddd;
+			background-color: #f0f0f0;
+			margin-top: 10px;
+
+			&:hover {
+				background-color: darken(#f0f0f0, 10%);
+			}
+		}
+	}
+}

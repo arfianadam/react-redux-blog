@@ -1,21 +1,25 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autosize from 'autosize';
+import { newComment } from 'redux/modules/posts';
 import styles from './CommentBox.scss';
 
 @connect()
 
 class CommentBox extends React.Component {
   static propTypes = {
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    id: PropTypes.string
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      comment: ''
+      comment: '',
+      name: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -32,15 +36,33 @@ class CommentBox extends React.Component {
     });
   }
 
+  handleChangeName(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    this.props.dispatch();
+    const { id } = this.props;
+    const { name, comment } = this.state;
+    this.props.dispatch(newComment(id, comment, name));
+    this.setState({
+      comment: '',
+      name: ''
+    });
   }
 
   render() {
-    const { comment } = this.state;
+    const { name, comment } = this.state;
     return (
       <div className={styles.CommentBox}>
+        <input
+          type="text"
+          placeholder="Type your name."
+          value={name}
+          onChange={this.handleChangeName}
+        />
         <textarea
           name=""
           id="commentbox"

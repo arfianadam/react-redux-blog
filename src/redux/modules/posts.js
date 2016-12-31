@@ -1,4 +1,5 @@
-import filter from 'lodash/filter';
+import find from 'lodash/find';
+import indexOf from 'lodash/indexOf';
 
 const initialState = {
   posts: [
@@ -90,10 +91,15 @@ export default function reducer(state = initialState, action) {
     }
 
     case 'NEW_COMMENT': {
-      const post = find(state.posts, { id: action.payload.id });
+      const { id, comment } = action.payload;
+      const posts = [...state.posts];
+      const post = find(posts, { id });
+      const postIndex = indexOf(posts, post);
+      post.comments.push(comment);
+      posts.splice(postIndex, 1, post);
       return {
         ...state,
-
+        posts
       };
     }
 
@@ -116,5 +122,19 @@ export function newPost() {
   return dispatch => {
     dispatch({ type: 'NEW_POST', payload: 'NEW_POST' });
     dispatch({ type: 'CLEAR_EDITOR' });
+  };
+}
+
+export function newComment(id, content, name) {
+  return dispatch => {
+    const newCommentObject = {
+      id,
+      comment: {
+        name,
+        content,
+        time: new Date().getTime(),
+      }
+    };
+    dispatch({ type: 'NEW_COMMENT', payload: newCommentObject });
   };
 }

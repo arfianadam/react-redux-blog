@@ -38,7 +38,7 @@ class Single extends React.Component {
     return (
       <div className={styles.Single}>
         <Post data={post} single />
-        <CommentsContainer id={post.id} />
+        <CommentsContainer id={post.id} data={post.comments} />
       </div>
     );
   }

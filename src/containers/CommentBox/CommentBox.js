@@ -16,7 +16,8 @@ class CommentBox extends React.Component {
     super(props);
     this.state = {
       comment: '',
-      name: ''
+      name: '',
+      empty: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -27,6 +28,7 @@ class CommentBox extends React.Component {
     const commentbox = document.getElementById('commentbox');
     commentbox.style.resize = 'none';
     commentbox.style.padding = '10px';
+    commentbox.style.marginBottom = '10px';
     autosize(commentbox);
   }
 
@@ -46,15 +48,22 @@ class CommentBox extends React.Component {
     e.preventDefault();
     const { id } = this.props;
     const { name, comment } = this.state;
-    this.props.dispatch(newComment(id, comment, name));
-    this.setState({
-      comment: '',
-      name: ''
-    });
+    if (name.length > 0 && comment.length > 0) {
+      this.props.dispatch(newComment(id, comment, name));
+      this.setState({
+        comment: '',
+        name: '',
+        empty: false
+      });
+    } else {
+      this.setState({
+        empty: true
+      });
+    }
   }
 
   render() {
-    const { name, comment } = this.state;
+    const { name, comment, empty } = this.state;
     return (
       <div className={styles.CommentBox}>
         <input
@@ -70,7 +79,10 @@ class CommentBox extends React.Component {
           placeholder="Type your comment."
           onChange={this.handleChange}
           value={comment} />
-        <div className={styles.submitButton}>
+        <div className={styles.submitButton + ' clearfix'}>
+          { empty ? (
+            <div className={styles.warning}>Name and comment cannot be empty.</div>
+          ) : null }
           <button onClick={this.handleSubmit}>Submit</button>
         </div>
       </div>

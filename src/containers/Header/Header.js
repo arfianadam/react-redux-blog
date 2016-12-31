@@ -54,7 +54,7 @@ class Header extends React.Component {
       <div className={styles.Header}>
         <div className={styles.container}>
           <div className={styles.title}>
-            React Blog <span>{ subtitle() }</span>
+            <Link to="/">React Blog</Link> <span>{ subtitle() }</span>
           </div>
           <nav>
             { nav() }

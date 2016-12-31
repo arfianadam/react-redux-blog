@@ -11,13 +11,18 @@
 	}
 
 	.submitButton {
-		text-align: right;
+
+		.warning {
+			float: left;
+			padding: 10px 0;
+			color: red;
+		}
 
 		button {
+			float: right;
 			padding: 10px 20px;
 			border: 1px solid #ddd;
 			background-color: #f0f0f0;
-			margin-top: 10px;
 
 			&:hover {
 				background-color: darken(#f0f0f0, 10%);

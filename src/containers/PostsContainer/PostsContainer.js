@@ -14,8 +14,8 @@ class PostsContainer extends React.Component {
 
   render() {
     const { posts } = this.props;
-    posts.reverse();
-    const renderPosts = posts.map((post, i) =>
+    const postsSorted = [...posts].reverse();
+    const renderPosts = postsSorted.map((post, i) =>
       <Post
         data={post}
         key={i}

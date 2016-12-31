@@ -16,7 +16,8 @@ export default () =>
     <IndexRoute getComponent={() => System.import('./containers/Home/Home')} />
 
     {/* Routes */}
-    <Route path="new" getComponent={() => System.import('./containers/New/New')} />
+    <Route path="/new" getComponent={() => System.import('./containers/New/New')} />
+    <Route path="/post/:id" getComponent={() => System.import('./containers/Single/Single')} />
 
     {/* Catch all route */}
     <Route path="*" component={NotFound} status={404} />

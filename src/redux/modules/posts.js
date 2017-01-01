@@ -22,7 +22,12 @@ function readFromLocal() {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'FETCH_DATA': {
-      return action.payload;
+      if (action.payload) {
+        return action.payload;
+      }
+      return {
+        ...state
+      };
     }
 
     case 'CREATING_TITLE': {

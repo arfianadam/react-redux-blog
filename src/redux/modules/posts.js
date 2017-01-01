@@ -2,46 +2,27 @@ import find from 'lodash/find';
 import indexOf from 'lodash/indexOf';
 
 const initialState = {
-  posts: [
-    // {
-    //   id: 1,
-    //   title: 'Some blog title',
-    //   time: new Date().getTime(),
-    //   content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
-    //   comments: [
-    //     {
-    //       time: new Date().getTime(),
-    //       content: 'What a nice article!'
-    //     }
-    //   ]
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Hello World!',
-    //   time: new Date().getTime(),
-    //   content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus iure vitae, soluta.</p>',
-    //   comments: [
-    //     {
-    //       time: new Date().getTime(),
-    //       content: 'What a nice article!'
-    //     }
-    //   ]
-    // }
-  ],
+  posts: [],
   editor: {
     title: '',
     content: {}
   }
 };
 
+function writeToLocal(data) {
+  const stringified = JSON.stringify(data);
+  localStorage.setItem('data', stringified);
+}
+
+function readFromLocal() {
+  const parsed = JSON.parse(localStorage.getItem('data'));
+  return parsed;
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'FETCH_POSTS': {
-      return;
-    }
-
-    case 'FETCH_POSTS_DONE': {
-      return;
+    case 'FETCH_DATA': {
+      return action.payload;
     }
 
     case 'CREATING_TITLE': {
@@ -65,7 +46,7 @@ export default function reducer(state = initialState, action) {
     }
 
     case 'NEW_POST': {
-      return {
+      const newState = {
         ...state,
         posts: [
           ...state.posts,
@@ -78,6 +59,8 @@ export default function reducer(state = initialState, action) {
           }
         ]
       };
+      writeToLocal(newState);
+      return newState;
     }
 
     case 'CLEAR_EDITOR': {
@@ -97,15 +80,23 @@ export default function reducer(state = initialState, action) {
       const postIndex = indexOf(posts, post);
       post.comments.push(comment);
       posts.splice(postIndex, 1, post);
-      return {
+      const newState = {
         ...state,
         posts
       };
+      writeToLocal(newState);
+      return newState;
     }
 
     default:
       return state;
   }
+}
+
+export function fetchData() {
+  return dispatch => {
+    dispatch({ type: 'FETCH_DATA', payload: readFromLocal() });
+  };
 }
 
 export function typePost(data, type) {

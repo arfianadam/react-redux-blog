@@ -20,31 +20,26 @@ class Single extends React.Component {
     this.state = {
       post: {}
     };
-    this.onMount = this.onMount.bind(this);
-  }
-
-  componentDidMount() {
-    const { id } = this.props.params;
-    this.onMount(id);
-  }
-
-  onMount(id) {
-    this.setState({
-      post: this.props.posts[id]
-    });
   }
 
   render() {
-    const { post } = this.state;
-    return (
-      <div className={styles.Single}>
-        <Helmet
-          title={post.title}
-        />
-        <Post data={post} single />
-        <CommentsContainer id={post.id} data={post.comments} />
-      </div>
-    );
+    const { posts, params } = this.props;
+    const post = posts[params.id];
+    function renderPost() {
+      if (post) {
+        return (
+          <div className={styles.Single}>
+            <Helmet
+              title={post.title}
+            />
+            <Post data={post} single />
+            <CommentsContainer id={post.id} data={post.comments} />
+          </div>
+        );
+      }
+      return null;
+    }
+    return renderPost();
   }
 }
 

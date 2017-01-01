@@ -1,16 +1,21 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { fetchData } from 'redux/modules/posts';
 import Header from '../Header';
 import styles from './App.scss';
 
+@connect()
+
 class App extends React.Component {
   static propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    dispatch: PropTypes.func
   };
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  };
+  componentDidMount() {
+    this.props.dispatch(fetchData());
+  }
 
   render() {
     const { children } = this.props;

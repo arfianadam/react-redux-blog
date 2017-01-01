@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import Header from '../Header';
 import styles from './App.scss';
 
@@ -15,6 +16,10 @@ class App extends React.Component {
     const { children } = this.props;
     return (
       <div className={styles.App}>
+        <Helmet
+          titleTemplate="%s - React Blog"
+          defaultTitle="React Blog"
+        />
         <Header />
         <div className={styles.container}>
           {children}

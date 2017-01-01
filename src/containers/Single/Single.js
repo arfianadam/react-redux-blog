@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import Post from 'components/Post';
 import CommentsContainer from 'containers/CommentsContainer';
@@ -37,6 +38,9 @@ class Single extends React.Component {
     const { post } = this.state;
     return (
       <div className={styles.Single}>
+        <Helmet
+          title={post.title}
+        />
         <Post data={post} single />
         <CommentsContainer id={post.id} data={post.comments} />
       </div>

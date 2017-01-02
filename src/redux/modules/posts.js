@@ -24,7 +24,9 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'FETCH_DATA': {
       if (action.payload) {
-        return action.payload;
+        if (action.payload.postId) {
+          return action.payload;
+        }
       }
       return {
         ...state

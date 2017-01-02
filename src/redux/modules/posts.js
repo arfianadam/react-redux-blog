@@ -68,6 +68,20 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
 
+    case 'DELETE_POST': {
+      const { id } = action.payload;
+      const posts = [...state.posts];
+      const post = find(posts, { id });
+      const postIndex = indexOf(posts, post);
+      posts.splice(postIndex, 1);
+      const newState = {
+        ...state,
+        posts
+      };
+      writeToLocal(newState);
+      return newState;
+    }
+
     case 'CLEAR_EDITOR': {
       return {
         ...state,
@@ -118,6 +132,12 @@ export function newPost() {
   return dispatch => {
     dispatch({ type: 'NEW_POST', payload: 'NEW_POST' });
     dispatch({ type: 'CLEAR_EDITOR' });
+  };
+}
+
+export function deletePost(id) {
+  return dispatch => {
+    dispatch({ type: 'DELETE_POST', payload: id });
   };
 }
 

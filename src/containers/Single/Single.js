@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import Post from 'components/Post';
 import CommentsContainer from 'containers/CommentsContainer';
+import Metabuttons from 'containers/Metabuttons';
 import styles from './Single.scss';
 
 @connect(store => ({
@@ -33,6 +34,7 @@ class Single extends React.Component {
               title={post.title}
             />
             <Post data={post} single />
+            <Metabuttons id={post.id} />
             <CommentsContainer id={post.id} data={post.comments} />
           </div>
         );

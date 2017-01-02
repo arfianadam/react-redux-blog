@@ -64,6 +64,10 @@ export default function reducer(state = initialState, action) {
             comments: []
           }
         ],
+        editor: {
+          title: '',
+          content: {}
+        },
         postId: (state.postId + 1)
       };
       writeToLocal(newState);
@@ -148,7 +152,6 @@ export function typePost(data, type) {
 export function newPost() {
   return dispatch => {
     dispatch({ type: 'NEW_POST', payload: 'NEW_POST' });
-    dispatch({ type: 'CLEAR_EDITOR' });
   };
 }
 

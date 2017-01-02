@@ -107,6 +107,21 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
 
+    case 'DELETE_COMMENT': {
+      const { id, index } = action.payload;
+      const posts = [...state.posts];
+      const post = find(posts, { id });
+      const postIndex = indexOf(posts, post);
+      post.comments.splice(post.comments[index], 1);
+      posts.splice(postIndex, 1, post);
+      const newState = {
+        ...state,
+        posts
+      };
+      writeToLocal(newState);
+      return newState;
+    }
+
     default:
       return state;
   }
@@ -152,5 +167,15 @@ export function newComment(id, content, name) {
       }
     };
     dispatch({ type: 'NEW_COMMENT', payload: newCommentObject });
+  };
+}
+
+export function deleteComment(id, index) {
+  return dispatch => {
+    const payload = {
+      id,
+      index
+    };
+    dispatch({ type: 'DELETE_COMMENT', payload });
   };
 }

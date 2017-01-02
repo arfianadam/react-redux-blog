@@ -4,15 +4,16 @@ import styles from './CommentsList.scss';
 
 class CommentsList extends React.Component {
   static propTypes = {
-    data: PropTypes.array
+    data: PropTypes.array,
+    id: PropTypes.string
   }
 
   render() {
-    const { data } = this.props;
+    const { data, id } = this.props;
     function renderComments() {
       if (data) {
         if (data.length > 0) {
-          const commentsList = data.map((comment, i) => <Comment key={i} data={comment} />);
+          const commentsList = data.map((comment, i) => <Comment index={i} id={id} key={i} data={comment} />);
           return commentsList;
         }
         return null;

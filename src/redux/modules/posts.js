@@ -6,7 +6,8 @@ const initialState = {
   editor: {
     title: '',
     content: {}
-  }
+  },
+  postId: 0
 };
 
 function writeToLocal(data) {
@@ -56,20 +57,21 @@ export default function reducer(state = initialState, action) {
         posts: [
           ...state.posts,
           {
-            id: state.posts.length.toString(),
+            id: state.postId.toString(),
             title: state.editor.title,
             time: new Date().getTime(),
             content: state.editor.content,
             comments: []
           }
-        ]
+        ],
+        postId: (state.postId + 1)
       };
       writeToLocal(newState);
       return newState;
     }
 
     case 'DELETE_POST': {
-      const { id } = action.payload;
+      const id = action.payload;
       const posts = [...state.posts];
       const post = find(posts, { id });
       const postIndex = indexOf(posts, post);

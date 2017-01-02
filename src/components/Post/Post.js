@@ -13,14 +13,14 @@ class Post extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, single } = this.props;
     const time = new Date(data.time);
     const timeRender = monthNames[time.getMonth()] + ' ' + time.getDate();
     return (
-      <article className={styles.Post}>
+      <article className={single ? styles.PostSingle : styles.Post}>
         <header>
           <h1>
-            {!this.props.single ? (
+            {!single ? (
               <Link to={'post/' + data.id}>{data.title}</Link>
             ) : data.title
             }

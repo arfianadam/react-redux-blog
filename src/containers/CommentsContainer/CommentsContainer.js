@@ -23,7 +23,7 @@ class CommentsContainer extends React.Component {
       <div className={styles.CommentsContainer}>
         <h3>Discussion</h3>
         {commentsNumber()}
-        <CommentsList data={data} />
+        <CommentsList id={id} data={data} />
         <hr />
         <h5 className={styles.writeLabel}>Write your comment</h5>
         <CommentBox id={id} />

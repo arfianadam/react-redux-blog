@@ -68,6 +68,20 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
 
+    case 'DELETE_POST': {
+      const { id } = action.payload;
+      const posts = [...state.posts];
+      const post = find(posts, { id });
+      const postIndex = indexOf(posts, post);
+      posts.splice(postIndex, 1);
+      const newState = {
+        ...state,
+        posts
+      };
+      writeToLocal(newState);
+      return newState;
+    }
+
     case 'CLEAR_EDITOR': {
       return {
         ...state,
@@ -84,6 +98,21 @@ export default function reducer(state = initialState, action) {
       const post = find(posts, { id });
       const postIndex = indexOf(posts, post);
       post.comments.push(comment);
+      posts.splice(postIndex, 1, post);
+      const newState = {
+        ...state,
+        posts
+      };
+      writeToLocal(newState);
+      return newState;
+    }
+
+    case 'DELETE_COMMENT': {
+      const { id, index } = action.payload;
+      const posts = [...state.posts];
+      const post = find(posts, { id });
+      const postIndex = indexOf(posts, post);
+      post.comments.splice(post.comments[index], 1);
       posts.splice(postIndex, 1, post);
       const newState = {
         ...state,
@@ -121,6 +150,12 @@ export function newPost() {
   };
 }
 
+export function deletePost(id) {
+  return dispatch => {
+    dispatch({ type: 'DELETE_POST', payload: id });
+  };
+}
+
 export function newComment(id, content, name) {
   return dispatch => {
     const newCommentObject = {
@@ -132,5 +167,15 @@ export function newComment(id, content, name) {
       }
     };
     dispatch({ type: 'NEW_COMMENT', payload: newCommentObject });
+  };
+}
+
+export function deleteComment(id, index) {
+  return dispatch => {
+    const payload = {
+      id,
+      index
+    };
+    dispatch({ type: 'DELETE_COMMENT', payload });
   };
 }

@@ -1,4 +1,4 @@
-.Post {
+.Post, .PostSingle {
 	margin-bottom: 5rem;
 	header {
 		margin-bottom: 2rem;
@@ -11,4 +11,8 @@
 	hr {
 		margin-top: 5rem;
 	}
+}
+
+.PostSingle {
+	margin-bottom: 20px;
 }

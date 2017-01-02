@@ -112,7 +112,7 @@ export default function reducer(state = initialState, action) {
       const posts = [...state.posts];
       const post = find(posts, { id });
       const postIndex = indexOf(posts, post);
-      post.comments.splice(post.comments[index], 1);
+      post.comments.splice(index, 1);
       posts.splice(postIndex, 1, post);
       const newState = {
         ...state,

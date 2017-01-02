@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import find from 'lodash/find';
 import Post from 'components/Post';
 import CommentsContainer from 'containers/CommentsContainer';
 import Metabuttons from 'containers/Metabuttons';
@@ -25,7 +26,8 @@ class Single extends React.Component {
 
   render() {
     const { posts, params } = this.props;
-    const post = posts[params.id];
+    const { id } = params;
+    const post = find(posts, { id });
     function renderPost() {
       if (post) {
         return (
